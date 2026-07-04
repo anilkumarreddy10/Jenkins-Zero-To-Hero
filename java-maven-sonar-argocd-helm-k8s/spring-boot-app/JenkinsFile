@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         REGISTRY = "docker.io/gangalakunta"
-        IMAGE_TAG  = "latest"
+        IMAGE_TAG  = ${BUILD_NUMBER}
         IMAGE_NAME = "spring-boot-app" 
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                    sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                   sh "docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                   sh "docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
