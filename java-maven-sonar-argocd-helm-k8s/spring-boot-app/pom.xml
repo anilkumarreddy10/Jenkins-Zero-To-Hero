@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <scm>
-    <connection>scm:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</connection>
-    <developerConnection>scm:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</developerConnection>
+    <connection>scm:git:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</connection>
+    <developerConnection>scm:git:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</developerConnection>
     <url>https://github.com/anilkumarreddy10/Jenkins-Zero-To-Hero</url>
     </scm>
 
