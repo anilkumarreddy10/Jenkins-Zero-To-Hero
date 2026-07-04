@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         REGISTRY = "docker.io/gangalakunta"
-        IMAGE_TAG  = ${BUILD_NUMBER}
+        IMAGE_TAG  = "latest"
         IMAGE_NAME = "spring-boot-app" 
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
