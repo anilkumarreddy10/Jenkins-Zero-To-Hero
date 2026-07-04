@@ -67,7 +67,7 @@ pipeline {
         }
         stage('deploy to gke') {
             steps {
-                sh "cd java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests && kubectl apply -f Deployment.yaml"
+                sh "kubectl apply -f java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/ "
             }
         }
     }
