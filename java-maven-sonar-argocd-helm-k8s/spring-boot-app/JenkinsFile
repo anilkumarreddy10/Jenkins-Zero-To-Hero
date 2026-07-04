@@ -21,7 +21,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                git credentialsId: 'git',
+                    credentialsId: 'git',
                     url: 'git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git'
             }
         }
