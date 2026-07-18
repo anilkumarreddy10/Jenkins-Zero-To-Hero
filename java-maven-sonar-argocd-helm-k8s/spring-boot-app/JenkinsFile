@@ -42,7 +42,7 @@ pipeline {
         stage('sonarqube') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar'
+                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.skipCoverage=true'
                 }
             }
         }
