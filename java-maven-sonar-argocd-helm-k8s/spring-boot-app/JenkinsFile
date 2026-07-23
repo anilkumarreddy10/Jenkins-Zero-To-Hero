@@ -60,15 +60,16 @@ pipeline {
                 }
             }
         }
-        stage('connect to gke') {
-            steps {
-                sh "gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION"
-            }
-        }
         stage('deploy to gke') {
             steps {
-                sh "kubectl apply -f java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/ "
-            }
+                withCredentials([
+                     file(
+                         credentialsId: 'gke-kubeconfig',
+                         variable: 'KUBECONFIG'
+                     )
+                ]) {
+                    sh "kubectl apply -f java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/ "
+             }
         }
     }
 }
