@@ -5,6 +5,7 @@ pipeline {
         maven 'mvn'
     }
     environment {
+        #APP_PATH = "java-maven-sonar-argocd-helm-k8s/spring-boot-app"
         REGISTRY = "docker.io/gangalakunta"
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
@@ -28,12 +29,18 @@ pipeline {
             steps {
                 configFileProvider([
                     configFile(fileId: 'maven-settings', variable: 'SETTINGS')]) {
-
-                    sh """ cd java-maven-sonar-argocd-helm-k8s/spring-boot-app &&
-                    mvn -B release:clean release:prepare release:perform \
-                    -Dmaven.test.failure.ignore=true \
-                    -s ${SETTINGS}
-                    """
+                    script {
+                        if (params.PERFORM_MAVEN_RELEASE) {
+                           sh """ cd java-maven-sonar-argocd-helm-k8s/spring-boot-app &&
+                           mvn -B release:clean release:prepare release:perform \
+                           -Dmaven.test.failure.ignore=true \
+                           -s ${SETTINGS}
+                           """
+                        }
+                        else{
+                          sh 'mvn clean package'
+                        }
+                    }
                 }
             }
         }
