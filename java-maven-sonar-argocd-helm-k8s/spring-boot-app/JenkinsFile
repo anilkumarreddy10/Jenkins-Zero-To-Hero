@@ -5,7 +5,7 @@ pipeline {
         maven 'mvn'
     }
     environment {
-        #APP_PATH = "java-maven-sonar-argocd-helm-k8s/spring-boot-app"
+        APP_PATH = "java-maven-sonar-argocd-helm-k8s/spring-boot-app"
         REGISTRY = "docker.io/gangalakunta"
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
@@ -31,7 +31,7 @@ pipeline {
                     configFile(fileId: 'maven-settings', variable: 'SETTINGS')]) {
                     script {
                         if (params.PERFORM_MAVEN_RELEASE) {
-                           sh """ cd java-maven-sonar-argocd-helm-k8s/spring-boot-app &&
+                           sh """ cd ${APP_PATH} &&
                            mvn -B release:clean release:prepare release:perform \
                            -Dmaven.test.failure.ignore=true \
                            -s ${SETTINGS}
@@ -47,7 +47,7 @@ pipeline {
         stage('sonarqube') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar'
+                    sh 'cd ${APP_PATH} && mvn sonar:sonar'
                 }
             }
         }
@@ -58,7 +58,7 @@ pipeline {
                       env.IMAGE_NAME = pom.artifactId
                       env.IMAGE_TAG  = pom.version
                 }
-                sh "cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ."
+                sh "cd ${APP_PATH} && docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ."
                 sh " docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
