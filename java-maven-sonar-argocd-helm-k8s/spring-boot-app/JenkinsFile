@@ -47,7 +47,7 @@ pipeline {
         stage('docker') {
             steps {
                 script {
-                     def pom = readMavenPom file: 'pom.xml'
+                     def pom = readMavenPom file: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml'
                       env.IMAGE_NAME = pom.artifactId
                       env.IMAGE_TAG  = pom.version
                 }
