@@ -5,13 +5,13 @@
     <connection>scm:git:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</connection>
     <developerConnection>scm:git:git@github.com:anilkumarreddy10/Jenkins-Zero-To-Hero.git</developerConnection>
     <url>https://github.com/anilkumarreddy10/Jenkins-Zero-To-Hero</url>
-      <tag>spring-boot-demo-1.18</tag>
+      <tag>HEAD</tag>
   </scm>
 
 
     <groupId>com.anil</groupId>
     <artifactId>spring-boot-demo</artifactId>
-    <version>1.18</version>
+    <version>1.19-SNAPSHOT</version>
 
     <name>spring-boot-demo</name>
     <url />
