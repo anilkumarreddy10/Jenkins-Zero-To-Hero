@@ -6,8 +6,6 @@ pipeline {
     }
     environment {
         REGISTRY = "docker.io/gangalakunta"
-        IMAGE_TAG  = readMavenPom().getVersion()
-        IMAGE_NAME = readMavenPom().getArtifactId()
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
         REGION = 'us-central1'
@@ -48,6 +46,11 @@ pipeline {
         }
         stage('docker') {
             steps {
+                script {
+                     def pom = readMavenPom file: 'pom.xml'
+                      env.IMAGE_NAME = pom.artifactId
+                      env.IMAGE_TAG  = pom.version
+                }
                 sh "cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ."
                 sh " docker tag ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER} ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
