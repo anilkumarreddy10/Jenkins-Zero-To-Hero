@@ -6,8 +6,8 @@ pipeline {
     }
     environment {
         REGISTRY = "docker.io/gangalakunta"
-        IMAGE_TAG  = "latest"
-        IMAGE_NAME = "spring-boot-app" 
+        IMAGE_TAG  = readMavenPom().getVersion()
+        IMAGE_NAME = readMavenPom().getArtifactId()
         PROJECT_ID = 'project-820f02b7-4f02-4540-a71'
         CLUSTER_NAME = 'my-cluster'
         REGION = 'us-central1'
