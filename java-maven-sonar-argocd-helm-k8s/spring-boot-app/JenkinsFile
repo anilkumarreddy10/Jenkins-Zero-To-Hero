@@ -47,7 +47,7 @@ pipeline {
         stage('sonarqube') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh 'cd ${APP_PATH} && mvn sonar:sonar -s ${SETTINGS}'
+                    sh """cd ${APP_PATH} && mvn sonar:sonar -s ${SETTINGS}"""
                 }
             }
         }
