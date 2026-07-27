@@ -48,7 +48,7 @@ pipeline {
             steps {
                 configFileProvider([configFile(fileId: 'maven-settings', variable: 'SETTINGS')]){
                     withSonarQubeEnv('sonarqube') {
-                        sh """cd ${APP_PATH} && mvn sonar:sonar -s ${SETTINGS}"""
+                        sh """cd ${APP_PATH} && mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -s ${SETTINGS}"""
                     }
                 }
             }
