@@ -46,8 +46,10 @@ pipeline {
         }
         stage('sonarqube') {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh """cd ${APP_PATH} && mvn sonar:sonar -s ${SETTINGS}"""
+                configFileProvider([configFile(fileId: 'maven-settings', variable: 'SETTINGS')]){
+                    withSonarQubeEnv('sonarqube') {
+                        sh """cd ${APP_PATH} && mvn sonar:sonar -s ${SETTINGS}"""
+                    }
                 }
             }
         }
