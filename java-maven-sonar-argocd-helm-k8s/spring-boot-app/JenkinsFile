@@ -38,7 +38,7 @@ pipeline {
                            """
                         }
                         else{
-                          sh 'cd ${APP_PATH} && mvn clean package'
+                          sh 'cd ${APP_PATH} && mvn clean package -s ${SETTINGS}'
                         }
                     }
                 }
