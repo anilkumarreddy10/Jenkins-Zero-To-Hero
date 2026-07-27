@@ -53,21 +53,15 @@ pipeline {
                 }
             }
         }
-        stage('docker-build') {
+        stage('docker-build & push') {
             steps {
                 script {
                      def pom = readMavenPom file: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml'
                       env.IMAGE_NAME = pom.artifactId
                       env.IMAGE_TAG  = pom.version
                       def image = docker.build("${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}","${APP_PATH}")
-                }
-            }
-        }
-        stage('push image') {
-            steps {
-                script {
-                   docker.withRegistry('https://index.docker.io/v1/','docker-cred')
-                   image.push()
+                      docker.withRegistry('https://index.docker.io/v1/','docker-cred')
+                      image.push()
                 }
             }
         }
