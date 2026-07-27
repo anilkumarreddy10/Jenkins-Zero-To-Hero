@@ -56,7 +56,7 @@ pipeline {
         stage('docker-build') {
             steps {
                 script {
-                     def pom = readMavenPom file: '${APP_PATH}/pom.xml'
+                     def pom = readMavenPom file: 'java-maven-sonar-argocd-helm-k8s/spring-boot-app/pom.xml'
                       env.IMAGE_NAME = pom.artifactId
                       env.IMAGE_TAG  = pom.version
                       def image = docker.build("${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}","${APP_PATH}")
